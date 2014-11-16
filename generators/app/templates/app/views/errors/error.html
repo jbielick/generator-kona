@@ -1,0 +1,14 @@
+{% extends '../layouts/application.html' %}
+{% block title %}
+  Error: {{ error }}
+{% endblock %}
+{% block content %}
+<br>
+{% if env === 'development' %}
+  <small>
+    <pre>
+      <code>{{ stack }}</code>
+    </pre>
+  </small>
+{% endif %}
+{% endblock %}
