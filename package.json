@@ -1,7 +1,7 @@
 {
   "name": "generator-kona",
   "version": "0.1.0",
-  "description": "Yeoman generator",
+  "description": "yeoman generator for the kona framework",
   "license": "MIT",
   "main": "app/index.js",
   "repository": "jbielick/generator-kona",
