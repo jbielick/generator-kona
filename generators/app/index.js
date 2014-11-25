@@ -7,7 +7,7 @@ var chalk = require('chalk');
 
 var KonaGenerator = yeoman.generators.Base.extend({
   constructor: function() {
-    this.constructor.__super__.constructor.apply(this, arguments);
+    yeoman.generators.Base.apply(this, arguments);
     this.argument('appName', {
       type: String,
       required: false
@@ -61,7 +61,7 @@ var KonaGenerator = yeoman.generators.Base.extend({
 
   writing: {
     app: function () {
-      this.destinationRoot(this.appName)
+      this.destinationRoot(this.appName);
 
       this.template('_package.json', 'package.json');
       this.template('_bower.json', 'bower.json');

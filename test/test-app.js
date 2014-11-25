@@ -8,9 +8,14 @@ var os = require('os');
 
 describe('kona:app', function () {
   before(function (done) {
+    var deps = [
+      [helpers.createDummyGenerator(), 'kona:controller']
+    ];
     helpers.run(path.join(__dirname, '../generators/app'))
       .inDir(path.join(os.tmpdir(), './temp-test'))
       .withOptions({ 'skip-install': true })
+      .withArguments(['test'])
+      .withGenerators(deps)
       .on('end', done);
   });
 
