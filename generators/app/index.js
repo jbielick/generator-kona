@@ -8,8 +8,8 @@ var chalk = require('chalk');
 var KonaGenerator = yeoman.generators.Base.extend({
   constructor: function() {
     this.constructor.__super__.constructor.apply(this, arguments);
-    this.argument('appName', { 
-      type: String, 
+    this.argument('appName', {
+      type: String,
       required: false
     });
     if (!this.appName) {
@@ -27,9 +27,7 @@ var KonaGenerator = yeoman.generators.Base.extend({
     var done = this.async(),
         _this = this;
 
-    this.log(yosay(
-      'Welcome to the Kona generator!'
-    ));
+    this.log('Welcome to the Kona generator!');
 
     if (this.defaultedAppName) {
       this.prompt({
@@ -72,6 +70,11 @@ var KonaGenerator = yeoman.generators.Base.extend({
       this.directory('app', 'app');
       this.directory('config', 'config');
 
+    },
+    controllers: function(done) {
+      this.composeWith('kona:controller', {
+        arguments: ['Application']
+      });
     }
   },
 

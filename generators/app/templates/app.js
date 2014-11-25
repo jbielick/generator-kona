@@ -1,3 +1,4 @@
-var kona = require('kona');
+var Kona = require('kona');
+var app = new Kona();
 
-kona.listen();
+app.listen();
