@@ -2,8 +2,30 @@
 
 {% block content %}
 
-<div class="row">
-
-</div>
+<h3><%= _.titleize(name) %></h3>
+<table width="100%">
+  <thead>
+    <th width="150">ID</th>
+    <th>Attributes</th>
+    <th class="text-right">Actions</th>
+  </thead>
+  <tbody>
+    <%= '{% for ' + singularName + ' in ' + name + ' %}' %>
+    <tr>
+      <td>
+        <%= '{{ ' + singularName + '.id }}' %>
+      </td>
+      <td>
+        <%= '{{ JSON.stringify(' + singularName + ') }}' %>
+      </td>
+      <td class="text-right">
+        <a title="View"><i class="fi-eye"></i></a>
+        <a title="Edit"><i class="fi-pencil"></i></a>
+        <a title="Destroy"><i class="fi-trash"></i></a>
+      </td>
+    </tr>
+    <%= '{% endfor %}' %>
+  </tbody>
+</table>
 
 {% endblock %}

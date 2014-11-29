@@ -2,7 +2,8 @@
   "name": "<%= appname %>",
   "version": "0.0.0",
   "dependencies": {
-    "foundation": "~5.4.7"
+    "foundation": "~5.4.7",
+    "foundation-icon-fonts": "zurb/foundation-icon-fonts"
   }
 }
 

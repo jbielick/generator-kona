@@ -18,6 +18,7 @@
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="stylesheet" href="/bower_components/foundation/css/normalize.css">
     <link rel="stylesheet" href="/bower_components/foundation/css/foundation.css">
+    <link rel="stylesheet" href="/bower_components/foundation-icon-fonts/foundation-icons.css">
     <link rel="stylesheet" href="/css/main.css">
   </head>
   <body>
@@ -68,7 +69,7 @@
       e=o.createElement(i);r=o.getElementsByTagName(i)[0];
       e.src='//www.google-analytics.com/analytics.js';
       r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-      ga('create','UA-XXXXX-X');ga('send','pageview');
+      ga('create','{{ Kona.config.gaTrackingId }}');ga('send','pageview');
     </script>
   </body>
 </html>

@@ -12,6 +12,9 @@ var KonaViewGenerator = yeoman.generators.NamedBase.extend({
     this._.mixin(_s);
     this.name = this.name.toLowerCase();
     this.name = this._.pluralize(this.name);
+    this.singularName = this._.singularize(this.name);
+    this.slug = this._.slugify(this.name);
+    this.additional = this.arguments.slice(1);
   },
 
   initializing: function () {
@@ -20,12 +23,15 @@ var KonaViewGenerator = yeoman.generators.NamedBase.extend({
 
   writing: {
     views: function() {
-      var _this = this;
-      this.singularName = this._.singularize(this.name);
-      this.slug = this._.slugify(this.name);
+      var dest = path.join('app', 'views', this.slug);
+
       ['edit', 'index', 'add', 'show'].forEach(function(tpl) {
-        _this.template(tpl + '.html', path.join('app', 'views', _this.slug, tpl + '.html'));
-      });
+        this.template(tpl + '.html', path.join(dest, tpl + '.html'));
+      }.bind(this));
+
+      this.additional.forEach(function(tpl) {
+        this.template('generic.html', path.join(dest, tpl + '.html'));
+      }.bind(this));
     }
   },
 

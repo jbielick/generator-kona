@@ -10,10 +10,13 @@ var KonaCtrlGenerator = yeoman.generators.NamedBase.extend({
   constructor: function() {
     this.constructor.__super__.constructor.apply(this, arguments);
     this._.mixin(_s);
-    this.name = this._.capitalize(this._.slugify(this._.humanize(this.name)));
-    if (this.name.toLowerCase() != 'application') {
+    this.option('scaffold');
+    this.name = this._.slugify(this._.humanize(this.name)).toLowerCase();
+    if (this.name != 'application') {
       this.name = this._.pluralize(this.name);
     }
+    this.singularName = this._.singularize(this.name);
+    this.actions = this.arguments.slice(1);
   },
 
   initializing: function () {
@@ -22,16 +25,12 @@ var KonaCtrlGenerator = yeoman.generators.NamedBase.extend({
 
   writing: {
     controller: function () {
-      var name = this.name.toLowerCase() + '-controller.js',
-          dest = path.join('.', 'app', 'controllers', name);
+      var fileName = this.name + '-controller.js',
+          dest = path.join('.', 'app', 'controllers', fileName);
 
-      if (this.name === 'Application') {
+      if (this.name === 'application') {
         this.require = false;
-        if (this.api) {
-          this.baseCtrlName = 'Kona.Controller.Api';
-        } else {
-          this.baseCtrlName = 'Kona.Controller.Base';
-        }
+        this.baseCtrlName = 'Kona.Controller.Base';
       } else {
         this.require = true;
         this.baseCtrlName = 'ApplicationController';
@@ -42,7 +41,7 @@ var KonaCtrlGenerator = yeoman.generators.NamedBase.extend({
   },
 
   end: function () {
-    this.log(this._.capitalize(this.name) + 'Controller generated.');
+    this.log(this._.titleize(this.name) + 'Controller generated.');
   }
 });
 

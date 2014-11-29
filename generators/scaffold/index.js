@@ -19,10 +19,20 @@ var KonaScaffoldGenerator = yeoman.generators.NamedBase.extend({
 
   writing: {
     controller: function() {
-      this.composeWith('kona:controller', {arguments: [this.name, 'api']});
+      this.composeWith('kona:controller', {
+        args: this.arguments,
+        options: {
+          scaffold: true
+        }
+      });
     },
     views: function() {
-      this.composeWith('kona:views', {arguments: [this.name]});
+      this.composeWith('kona:views', {
+        args: this.arguments,
+        options: {
+          scaffold: true
+        }
+      });
     },
     routes: function() {
       var routesFilePath = path.join('config', 'routes.js'),
