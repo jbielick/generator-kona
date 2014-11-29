@@ -11,7 +11,9 @@ var KonaCtrlGenerator = yeoman.generators.NamedBase.extend({
     this.constructor.__super__.constructor.apply(this, arguments);
     this._.mixin(_s);
     this.name = this._.capitalize(this._.slugify(this._.humanize(this.name)));
-    this.name = this._.pluralize(this.name);
+    if (this.name.toLowerCase() != 'application') {
+      this.name = this._.pluralize(this.name);
+    }
   },
 
   initializing: function () {

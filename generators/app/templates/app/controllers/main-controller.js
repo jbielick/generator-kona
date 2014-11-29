@@ -5,11 +5,11 @@ var MainController = ApplicationController.extend({
   constructor: function() {
     this.constructor.__super__.constructor.apply(this, arguments);
   },
-  home: function* (params) {},
-  show: function* (params) {
+  home: function*() {},
+  show: function*() {
     yield this.respondTo({
-      html: function* () {
-        yield this.render(params.path);
+      html: function*() {
+        this.render(this.params('path'));
       }
     });
   }

@@ -3,7 +3,7 @@ var <%= baseCtrlName %> = require('./<%= _.slugify(_.underscore(baseCtrlName)) %
 <% } %>
 
 var <%= name %>Controller = <%= baseCtrlName %>.extend({
-  constructor: function (params) {
+  constructor: function() {
     <%= baseCtrlName %>.apply(this, arguments);
   }
 });
