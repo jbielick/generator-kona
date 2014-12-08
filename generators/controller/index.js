@@ -30,7 +30,7 @@ var KonaCtrlGenerator = yeoman.generators.NamedBase.extend({
 
       if (this.name === 'application') {
         this.require = false;
-        this.baseCtrlName = 'Kona.Controller.Base';
+        this.baseCtrlName = 'kona.Controller.Base';
       } else {
         this.require = true;
         this.baseCtrlName = 'ApplicationController';
