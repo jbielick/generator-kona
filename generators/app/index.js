@@ -68,6 +68,7 @@ var KonaGenerator = yeoman.generators.Base.extend({
       this.template('bowerrc', '.bowerrc');
       this.copy('app.js', 'app.js');
       this.directory('app', 'app');
+      this.directory('public', 'public');
       this.directory('log', 'log');
       this.directory('config', 'config');
 

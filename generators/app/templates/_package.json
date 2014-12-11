@@ -1,7 +1,5 @@
 {
   "name": "<%= appName %>",
   "version": "0.0.0",
-  "dependencies": {
-    "kona": "^0.4.0"
-  }
+  "dependencies": {}
 }

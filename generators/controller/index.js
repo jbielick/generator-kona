@@ -37,11 +37,9 @@ var KonaCtrlGenerator = yeoman.generators.NamedBase.extend({
       }
 
       this.template('controller.js', dest);
-    }
-  },
 
-  end: function () {
-    this.log(this._.titleize(this.name) + 'Controller generated.');
+      this.log(this._.titleize(this.name) + 'Controller generated.');
+    }
   }
 });
 

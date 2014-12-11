@@ -24,7 +24,15 @@ describe('kona:app', function () {
       'bower.json',
       'package.json',
       'app.js',
-      '.bowerrc'
+      'config/application.js',
+      'config/routes.js',
+      '.bowerrc',
+      'public/images/grind.jpg',
+      'public/favicon.ico',
+      'app/controllers/main-controller.js',
+      'app/views/main/home.html',
+      'app/views/layouts/application.html',
+      'app/views/errors/error.html'
     ]);
   });
 });
