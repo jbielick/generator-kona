@@ -82,7 +82,7 @@ var KonaGenerator = yeoman.generators.Base.extend({
 
   end: function () {
     if (!this.options['skip-install']) {
-      this.installDependencies();
+      this.installDependencies({silent: true});
     }
   }
 });
