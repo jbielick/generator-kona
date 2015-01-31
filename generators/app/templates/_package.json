@@ -3,5 +3,9 @@
   "version": "0.0.0",
   "dependencies": {
     "kona": "latest"
+  },
+  "scripts": {
+    "server": "./node_modules/.bin/kona server",
+    "console": "./node_modules/.bin/kona console"
   }
 }
