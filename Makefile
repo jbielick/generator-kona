@@ -6,14 +6,15 @@ test:
 		--bail
 
 test-cov:
-	@NODE_ENV=test node_modules/.bin/istanbul cover \
+	@NODE_ENV=test node \
+		node_modules/.bin/istanbul cover \
 		./node_modules/.bin/_mocha \
 		-- -u exports \
 		$(TESTS) \
 		--bail
 
 test-ci:
-	@NODE_ENV=test node --harmony \
+	@NODE_ENV=test node \
 		node_modules/.bin/istanbul cover \
 		./node_modules/.bin/_mocha \
 		--report lcovonly \
