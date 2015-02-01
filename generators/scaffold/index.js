@@ -5,6 +5,7 @@ var path = require('path');
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var _s = require('underscore.inflections');
+var fs = require('fs');
 
 var KonaScaffoldGenerator = yeoman.generators.NamedBase.extend({
   constructor: function() {
@@ -35,16 +36,21 @@ var KonaScaffoldGenerator = yeoman.generators.NamedBase.extend({
       });
     },
     routes: function() {
-      var routesFilePath = path.join('config', 'routes.js'),
-          contents = this.readFileAsString(routesFilePath),
-          parts = contents.split(/^\}\s*$/gm),
+      var root = this.destinationRoot(),
+          routesFilePath = path.join('config', 'routes.js'),
           resourceName = this._.pluralize(this.name.toLowerCase()),
-          route = "  router.resource('" + resourceName + "');";
+          route = "  router.resource('" + resourceName + "');",
+          routeRegex = new RegExp('router\\.resource\\(\(\'|"\)' + resourceName, 'g'),
+          contents,
+          parts;
+
+      contents = this.readFileAsString(routesFilePath);
+      parts = contents.split(/^\}\s*$/gm);
 
       if (!parts.length) {
         throw new Error('unable to parse routes.js! Check the syntax?');
         return;
-      } else if (~contents.indexOf(route)) {
+      } else if (routeRegex.test(contents)) {
         return;
       } else {
         parts[parts.length - 2] += route;

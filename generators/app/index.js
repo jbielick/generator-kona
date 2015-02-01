@@ -16,7 +16,7 @@ var KonaGenerator = yeoman.generators.Base.extend({
       this.appName = path.basename(process.cwd());
       this.defaultedAppName = true;
     }
-    this.appName = this._.camelize(this._.slugify(this._.humanize(this.appName)));
+    this.appName = this._.slugify(this._.humanize(this.appName));
   },
 
   initializing: function () {
@@ -45,11 +45,7 @@ var KonaGenerator = yeoman.generators.Base.extend({
             message: 'What name would you like to use?',
             default: 'konaApp'
           }, function(answers) {
-            _this.appName = _this._.camelize(
-              _this._.slugify(
-                _this._.humanize(answers.appName)
-              )
-            );
+            _this.appName = answers.appName;
             done();
           });
         }
@@ -80,11 +76,14 @@ var KonaGenerator = yeoman.generators.Base.extend({
     }
   },
 
-  end: function () {
+  install: function() {
+    /* istanbul ignore next */
     if (!this.options['skip-install']) {
       this.installDependencies({silent: true});
     }
-  }
+  },
+
+  end: function () {}
 });
 
 module.exports = KonaGenerator;

@@ -11,24 +11,35 @@ var KonaCtrlGenerator = yeoman.generators.NamedBase.extend({
     this.constructor.__super__.constructor.apply(this, arguments);
     this._.mixin(_s);
     this.option('scaffold');
-    this.name = this._.slugify(this._.humanize(this.name)).toLowerCase();
-    if (this.name != 'application') {
-      this.name = this._.pluralize(this.name);
-    }
-    this.singularName = this._.singularize(this.name);
-    this.actions = this.arguments.slice(1);
+    this._parseNames();
   },
 
-  initializing: function () {
-    this.pkg = require('../../package.json');
+  _parseNames: function(name) {
+
+    this.name = this._.trim(this.name);
+
+    if (this.name.toLowerCase() !== 'application') {
+      this.name = this._.pluralize(this.name);
+    }
+
+    this.snaked = this._.underscore(this.name);
+    this.slugged = this._.slugify(this.snaked);
+    this.classified = this._.camelize(this.snaked);
+    this.camelized = this._.camelize(this.snaked, false);
+    this.singularCamel = this._.singularize(this.camelized);
+
+    this.actions = this.arguments.slice(1).map(function(rawActionName) {
+      return this._.camelize(this._.underscore(rawActionName), false);
+    }.bind(this));
   },
 
   writing: {
     controller: function () {
-      var fileName = this.name + '-controller.js',
-          dest = path.join('.', 'app', 'controllers', fileName);
+      var root = this.destinationRoot(),
+          fileName = this.slugged + '-controller.js',
+          dest = path.join(root, 'app', 'controllers', fileName);
 
-      if (this.name === 'application') {
+      if (this.snaked === 'application') {
         this.require = false;
         this.baseCtrlName = 'kona.Controller.Base';
       } else {
@@ -38,7 +49,7 @@ var KonaCtrlGenerator = yeoman.generators.NamedBase.extend({
 
       this.template('controller.js', dest);
 
-      this.log(this._.titleize(this.name) + 'Controller generated.');
+      this.log(this.classified + 'Controller generated.');
     }
   }
 });

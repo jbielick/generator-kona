@@ -2,7 +2,7 @@ var path = require('path');<% if (require) { %>
 var <%= baseCtrlName %> = require('./<%= _.slugify(_.underscore(baseCtrlName)) %>');
 <% } %>
 
-var <%= _.titleize(name) %>Controller = <%= baseCtrlName %>.extend({
+var <%= classified %>Controller = <%= baseCtrlName %>.extend({
 
   constructor: function() {
     <%= baseCtrlName %>.apply(this, arguments);<% if (options.scaffold) { %>
@@ -10,27 +10,27 @@ var <%= _.titleize(name) %>Controller = <%= baseCtrlName %>.extend({
   }<% if (options.scaffold) { %>,
 
   index: function* () {
-    var <%= name %> = [];
-    this.set('<%= name %>', <%= name %>);
-    yield this.respondWith(<%= name %>);
+    var <%= camelized %> = [];
+    this.set('<%= camelized %>', <%= camelized %>);
+    yield this.respondWith(<%= camelized %>);
   },
 
   show: function* () {
-    var <%= singularName %> = {};
-    this.set('<%= singularName %>', <%= singularName %>);
-    yield this.respondWith(<%= singularName %>);
+    var <%= singularCamel %> = {};
+    this.set('<%= singularCamel %>', <%= singularCamel %>);
+    yield this.respondWith(<%= singularCamel %>);
   },
 
   add: function* () {
-    var <%= singularName %> = {};
-    this.set('<%= singularName %>', <%= singularName %>);
-    yield this.respondWith(<%= singularName %>);
+    var <%= singularCamel %> = {};
+    this.set('<%= singularCamel %>', <%= singularCamel %>);
+    yield this.respondWith(<%= singularCamel %>);
   },
 
   edit: function* () {
-    var <%= singularName %> = {};
-    this.set('<%= singularName %>', <%= singularName %>);
-    yield this.respondWith(<%= singularName %>);
+    var <%= singularCamel %> = {};
+    this.set('<%= singularCamel %>', <%= singularCamel %>);
+    yield this.respondWith(<%= singularCamel %>);
   },
 
   create: function* () {
