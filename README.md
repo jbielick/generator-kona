@@ -1,38 +1,64 @@
 Application generator for [Kona](https://github.com/jbielick/kona)
 =======
+
 [![Build Status](https://secure.travis-ci.org/jbielick/generator-kona.svg?branch=master)](https://travis-ci.org/jbielick/generator-kona)
-[![Coverage Status](https://img.shields.io/coveralls/jbielick/generator-kona.svg)](https://coveralls.io/r/jbielick/generator-kona)
+[![Coverage Status](https://coveralls.io/repos/jbielick/generator-kona/badge.svg)](https://coveralls.io/r/jbielick/generator-kona)
 
-> [Yeoman](http://yeoman.io) generator
+### What is this?
 
-## Getting Started
+This is a [yeoman](http://yeoman.io) generator. A generator is basically a plugin that can be run with the `yo` command to scaffold complete projects or useful parts.
 
-### What is Yeoman?
+This generator generates fresh, new [Kona](https://github.com/jbielick/kona) apps, controllers, scaffolds, views and other stuff.
 
-Yeoman is an application / file / project generator with many flavors.
+### Getting Started
 
-Not every new computer comes with a Yeoman pre-installed. He lives in the [npm](https://npmjs.org) package repository. You only have to ask for him once, then he packs up and moves into your hard drive. *Make sure you clean up, he likes new and shiny things.*
+If you don't have yeoman installed, install it globally via npm:
 
 ```bash
 npm install -g yo
 ```
 
-### Yeoman Generators
-
-Yeoman travels light. He didn't pack any generators when he moved in. You can think of a generator like a plug-in. You get to choose what type of application you wish to create, such as a Backbone application or even a Chrome extension.
-
-To install generator-kona from npm, run:
+Then you'll need this *generator-kona* generator globally so yeoman can find it:
 
 ```bash
 npm install -g generator-kona
 ```
 
-Finally, initiate the generator:
+Now you're all set! You can now use `yo` to generate kona applications or controllers, views, and scaffolds
+for your kona apps! See *Generators* below for the available generators.
+
+[cli]: http://i.imgur.com/Mbf0jWz.gif "Usage: generate a kona app"
+
+### Generators
+
+A Kona app:
 
 ```bash
-yo kona
+yo kona myNewApp
 ```
 
+A controller:
+
+```bash
+yo kona:controller books [optional actions to create for you separated by spaces...]
+```
+
+A scaffold (controller, resource route, views):
+
+```bash
+yo kona:scaffold user follow unfollow
+```
+
+...will yield
+
+```
+[A] app/controllers/user-controller.js
+[A] app/views/user/add.html
+[A] app/views/user/edit.html
+[A] app/views/user/index.html
+[A] app/views/user/show.html
+[M] app/config/routes.js
+```
 
 ## License
 
