@@ -2,7 +2,9 @@
   "name": "<%= appName %>",
   "version": "0.0.0",
   "dependencies": {
-    "kona": "latest"
+    "kona": "latest",
+    "co-views": "^0.3.0",
+    "ect": "^0.5.9"
   },
   "scripts": {
     "server": "./node_modules/.bin/kona server",

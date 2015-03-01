@@ -26,11 +26,11 @@ var KonaViewGenerator = yeoman.generators.NamedBase.extend({
       var dest = path.join('app', 'views', this.slug);
 
       ['edit', 'index', 'add', 'show'].forEach(function(tpl) {
-        this.template(tpl + '.html', path.join(dest, tpl + '.html'));
+        this.template(tpl + '.ect', path.join(dest, tpl + '.ect'));
       }.bind(this));
 
       this.additional.forEach(function(tpl) {
-        this.template('generic.html', path.join(dest, tpl + '.html'));
+        this.template('generic.ect', path.join(dest, tpl + '.ect'));
       }.bind(this));
     }
   },

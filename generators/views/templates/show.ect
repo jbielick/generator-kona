@@ -1,0 +1,10 @@
+<%= '<%% extend \'layouts/' + (this.layout || 'application') + '\' %>' %>
+
+<div class="row">
+  <dl>
+    <%= '<%% for key, value in @' + singularName + ' : %>' %>
+      <dt><%%= key %></dt>
+      <dd><%%- JSON.stringify value, null, 2 %></dt>
+    <%% end %>
+  </dl>
+</div>
