@@ -71,7 +71,7 @@ describe('kona:controller', function () {
         .on('end', function() {
           var filepath = getControllerPath('application');
           assert.fileContent(filepath, /ApplicationController/);
-          assert.fileContent(filepath, /kona\.Controller\.Base\.extend/);
+          assert.fileContent(filepath, /kona\/lib\/controller\//);
           done();
         });
     });

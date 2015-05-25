@@ -40,10 +40,10 @@ var KonaCtrlGenerator = yeoman.generators.NamedBase.extend({
           dest = path.join(root, 'app', 'controllers', fileName);
 
       if (this.snaked === 'application') {
-        this.require = false;
-        this.baseCtrlName = 'kona.Controller.Base';
+        this.baseCtrlPath = 'kona/lib/controller/request';
+        this.baseCtrlName = 'Controller';
       } else {
-        this.require = true;
+        this.baseCtrlPath = './application-controller';
         this.baseCtrlName = 'ApplicationController';
       }
 

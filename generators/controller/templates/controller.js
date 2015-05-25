@@ -1,6 +1,4 @@
-var path = require('path');<% if (require) { %>
-var <%= baseCtrlName %> = require('./<%= _.slugify(_.underscore(baseCtrlName)) %>');
-<% } %>
+var <%= baseCtrlName %> = require('<%= baseCtrlPath %>');
 
 var <%= classified %>Controller = <%= baseCtrlName %>.extend({
 
