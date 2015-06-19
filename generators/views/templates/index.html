@@ -10,13 +10,13 @@
     <th class="text-right">Actions</th>
   </thead>
   <tbody>
-    <%= '{% for ' + singularName + ' in ' + name + ' %}' %>
+    <%= '{% for ' + singularCamel + ' in ' + name + ' %}' %>
     <tr>
       <td>
-        <%= '{{ ' + singularName + '.id }}' %>
+        <%= '{{ ' + singularCamel + '.id }}' %>
       </td>
       <td>
-        <%= '{{ JSON.stringify(' + singularName + ') }}' %>
+        <%= '{{ JSON.stringify(' + singularCamel + ') }}' %>
       </td>
       <td class="text-right">
         <a title="View"><i class="fi-eye"></i></a>
