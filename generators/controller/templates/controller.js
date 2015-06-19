@@ -49,4 +49,4 @@ var <%= classified %>Controller = <%= baseCtrlName %>.extend({
 
 });
 
-module.exports = <%= _.titleize(name) %>Controller;
+module.exports = <%= classified %>Controller;
