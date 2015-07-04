@@ -4,29 +4,18 @@ var path = require('path');
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 var chalk = require('chalk');
-var _s = require('underscore.inflections');
+var NameParser = require('../../mixins/name-parser');
 
 var KonaCtrlGenerator = yeoman.generators.NamedBase.extend({
   constructor: function() {
     this.constructor.__super__.constructor.apply(this, arguments);
-    this._.mixin(_s);
     this.option('scaffold');
-    this._parseNames();
+    this.parseNameAndActions();
   },
 
-  _parseNames: function(name) {
+  parseNameAndActions: function() {
 
-    this.name = this._.trim(this.name);
-
-    if (this.name.toLowerCase() !== 'application') {
-      this.name = this._.pluralize(this.name);
-    }
-
-    this.snaked = this._.underscore(this.name);
-    this.slugged = this._.slugify(this.snaked);
-    this.classified = this._.camelize(this.snaked);
-    this.camelized = this._.camelize(this.snaked, false);
-    this.singularCamel = this._.singularize(this.camelized);
+    this.parseName(this.name);
 
     this.actions = this.arguments.slice(1).map(function(rawActionName) {
       return this._.camelize(this._.underscore(rawActionName), false);
@@ -35,9 +24,9 @@ var KonaCtrlGenerator = yeoman.generators.NamedBase.extend({
 
   writing: {
     controller: function () {
-      var root = this.destinationRoot(),
+      var rootDir = this.destinationRoot(),
           fileName = this.slugged + '-controller.js',
-          dest = path.join(root, 'app', 'controllers', fileName);
+          dest = path.join(rootDir, 'app', 'controllers', fileName);
 
       if (this.snaked === 'application') {
         this.baseCtrlPath = 'kona/lib/controller/request';
@@ -53,5 +42,7 @@ var KonaCtrlGenerator = yeoman.generators.NamedBase.extend({
     }
   }
 });
+
+NameParser(KonaCtrlGenerator);
 
 module.exports = KonaCtrlGenerator;

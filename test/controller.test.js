@@ -16,26 +16,52 @@ describe('kona:controller', function () {
       {
         arg: 'bird',
         file: 'birds',
-        named: 'Birds'
+        named: 'Birds',
+        camel: 'birds'
       },{
         arg: 'postal-codes',
         file: 'postal-codes',
-        named: 'PostalCodes'
+        named: 'PostalCodes',
+        camel: 'postalCodes'
       },{
-        arg: 'geoCodes',
-        file: 'geo-codes',
-        named: 'GeoCodes'
+        arg: 'postCodes',
+        file: 'post-codes',
+        named: 'PostCodes',
+        camel: 'postCodes'
+      },{
+        arg: 'geoCodeRegion',
+        scaffold: true,
+        file: 'geo-code-regions',
+        named: 'GeoCodeRegions',
+        camel: 'geoCodeRegions'
       }
     ].forEach(function(config) {
 
       it('creates a ' + config.named + ' controller', function(done) {
-        getRunner().withArguments([config.arg])
+
+        getRunner()
+          .withArguments([config.arg].concat(config.scaffold ? ['--scaffold'] : []))
           .on('end', function() {
             // console.log(fs.readdirSync(tmp + '/app/controllers'));
-            var filepath = 'app/controllers/' + config.file + '-controller.js'
+            var filepath = getControllerPath(config.file);
             assert.file(filepath);
             // console.log(fs.readFileSync(filepath).toString());
             assert.fileContent(filepath, new RegExp(config.named + 'Controller', 'g'));
+            if (config.scaffold) {
+              [
+                new RegExp('var ' + config.camel + ' =', 'g'),
+                new RegExp('var ' + config.camel.slice(0, config.camel.length - 1) + ' =', 'g'),
+                /add: function*/,
+                /index: function*/,
+                /show: function*/,
+                /edit: function*/,
+                /create: function*/,
+                /update: function*/,
+                /destroy: function*/
+              ].forEach(function(pattern) {
+                assert.fileContent(filepath, pattern);
+              });
+            }
             done();
           });
       });
@@ -44,9 +70,10 @@ describe('kona:controller', function () {
 
     it('adds arguments as action names', function(done) {
 
-      getRunner().withArguments(['bro', 'fist-bump', 'collarPop'])
+      getRunner()
+        .withArguments(['bro', 'fist-bump', 'collarPop'])
         .on('end', function() {
-          var filepath = 'app/controllers/bros-controller.js'
+          var filepath = getControllerPath('bros');
           assert.fileContent(filepath, /fistBump:\sfunction\*\(/);
           assert.fileContent(filepath, /collarPop:\sfunction\*\(/);
           done();
@@ -56,18 +83,21 @@ describe('kona:controller', function () {
 
     it('extends the application controller', function(done) {
 
-      getRunner().withArguments(['hat']).on('end', function() {
-        var filepath = getControllerPath('hats');
-        assert.fileContent(filepath, /ApplicationController\.extend/);
-        done();
-      });
+      getRunner()
+        .withArguments(['hat'])
+        .on('end', function() {
+          var filepath = getControllerPath('hats');
+          assert.fileContent(filepath, /ApplicationController\.extend/);
+          done();
+        });
 
     });
   });
 
   describe('application controller', function() {
     it('doesn\'t modify the name of application controller', function(done) {
-      getRunner().withArguments(['Application'])
+      getRunner()
+        .withArguments(['Application'])
         .on('end', function() {
           var filepath = getControllerPath('application');
           assert.fileContent(filepath, /ApplicationController/);
@@ -80,9 +110,9 @@ describe('kona:controller', function () {
 });
 
 function getRunner() {
-  return helpers.run(path.join(__dirname, '../generators/controller')).inDir(tmp)
+  return helpers.run(path.join(__dirname, '../generators/controller')).inDir(tmp);
 }
 
 function getControllerPath(name) {
-  return 'app/controllers/' + name + '-controller.js'
+  return 'app/controllers/' + name + '-controller.js';
 }

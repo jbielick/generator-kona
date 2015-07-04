@@ -4,14 +4,14 @@ var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
-var _s = require('underscore.inflections');
 var fs = require('fs');
+var NameParser = require('../../mixins/name-parser');
 
 var KonaScaffoldGenerator = yeoman.generators.NamedBase.extend({
+
   constructor: function() {
     this.constructor.__super__.constructor.apply(this, arguments);
-    this.name = this._.capitalize(this._.slugify(this._.humanize(this.name)));
-    this._.mixin(_s);
+    this.parseName(this.name);
   },
 
   initializing: function () {
@@ -36,13 +36,15 @@ var KonaScaffoldGenerator = yeoman.generators.NamedBase.extend({
       });
     },
     routes: function() {
-      var root = this.destinationRoot(),
-          routesFilePath = path.join('config', 'routes.js'),
-          resourceName = this._.pluralize(this.name.toLowerCase()),
-          route = "  router.resource('" + resourceName + "');",
-          routeRegex = new RegExp('router\\.resource\\(\(\'|"\)' + resourceName, 'g'),
-          contents,
-          parts;
+
+      var root = this.destinationRoot();
+      var routesFilePath = path.join('config', 'routes.js');
+      var route = "  router.resource('" + this.slugged + "');";
+      var routeRegex;
+      var contents;
+      var parts;
+
+      routeRegex = new RegExp('router\\.resource\\(\(\'|"\)' + this.slugged, 'g');
 
       contents = this.readFileAsString(routesFilePath);
       parts = contents.split(/^\}\s*$/gm);
@@ -62,5 +64,7 @@ var KonaScaffoldGenerator = yeoman.generators.NamedBase.extend({
 
   end: function () {}
 });
+
+NameParser(KonaScaffoldGenerator);
 
 module.exports = KonaScaffoldGenerator;
