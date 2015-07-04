@@ -1,4 +1,4 @@
-var _ = require('yo/node_modules/lodash');
+var _ = require('underscore');
 var underscoreInflections = require('underscore.inflections');
 
 function NameParser(target) {
