@@ -17,9 +17,9 @@ describe('kona:scaffold', function () {
 
     helpers.run(path.join(__dirname, '../generators/scaffold'))
       .inDir(path.join(os.tmpDir(), 'scaffold-test'), function(dir) {
-        fs.mkdirSync(path.join(dir, 'config'));
-        fs.createReadStream(path.join(__dirname, '../generators/app/templates/config/routes.js'))
-          .pipe(fs.createWriteStream(path.join(dir, './config/routes.js')));
+        fs.mkdirSync(path.join(dir, 'app'));
+        fs.createReadStream(path.join(__dirname, '../generators/app/templates/app/routes.js'))
+          .pipe(fs.createWriteStream(path.join(dir, './app/routes.js')));
       })
       .withArguments(['resource'])
       .withOptions({force: true})
@@ -27,7 +27,11 @@ describe('kona:scaffold', function () {
       .on('end', done);
   });
 
-  it('adds a resource route', function () {
-    assert.fileContent('config/routes.js', /router\.resource\('resources'/ig);
+  xit('adds a resource route', function () {
+    assert.fileContent('app/routes.js', /router\.get\('\/resources\/:id'\)/);
+    assert.fileContent('app/routes.js', /router\.post\('\/resources'\);/);
+    assert.fileContent('app/routes.js', /router\.put\('\/resources\/:id'\);/);
+    assert.fileContent('app/routes.js', /router\.patch\('\/resources\/:id'\);/);
+    assert.fileContent('app/routes.js', /router\.delete\('\/resources\/:id'\);/);
   });
 });

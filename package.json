@@ -1,6 +1,6 @@
 {
   "name": "generator-kona",
-  "version": "0.5.4",
+  "version": "1.0.0",
   "description": "yeoman generator for the kona framework",
   "license": "MIT",
   "main": "app/index.js",
@@ -31,6 +31,6 @@
     "mocha": "*"
   },
   "peerDependencies": {
-    "yo": ">=1.0.0"
+    "kona": "^1.0.0"
   }
 }

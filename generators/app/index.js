@@ -1,5 +1,6 @@
 'use strict';
 var util = require('util');
+var fs = require('fs');
 var path = require('path');
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
@@ -21,6 +22,7 @@ var KonaGenerator = yeoman.generators.Base.extend({
 
   initializing: function () {
     this.pkg = require('../../package.json');
+    this.targetKonaVersion = this.pkg.peerDependencies.kona;
   },
 
   prompting: function () {
@@ -57,11 +59,23 @@ var KonaGenerator = yeoman.generators.Base.extend({
 
   writing: {
     app: function () {
+
       this.destinationRoot(this.appName);
 
-      this.template('_package.json', 'package.json');
-      this.template('_bower.json', 'bower.json');
-      this.template('bowerrc', '.bowerrc');
+      [
+        'package.json',
+        'gulpfile.js'
+      ].forEach(function(manifest) {
+        this.template('_' + manifest, manifest);
+      }, this);
+
+      [
+        'gitignore',
+        'env'
+      ].forEach(function(hiddenFile) {
+        this.template(hiddenFile, '.' + hiddenFile);
+      }, this);
+
       this.copy('app.js', 'app.js');
       this.directory('app', 'app');
       this.directory('public', 'public');

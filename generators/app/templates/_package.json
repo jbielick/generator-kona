@@ -1,8 +1,9 @@
 {
   "name": "<%= appName %>",
   "version": "0.0.0",
+  "main": "app.js",
   "dependencies": {
-    "kona": "^0.9.0"
+    "kona": "<%= targetKonaVersion %>"
   },
   "scripts": {
     "start": "./node_modules/.bin/kona server",

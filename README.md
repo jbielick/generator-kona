@@ -57,7 +57,7 @@ yo kona:scaffold user follow unfollow
 [A] app/views/user/edit.html
 [A] app/views/user/index.html
 [A] app/views/user/show.html
-[M] app/config/routes.js
+[M] app/routes.js
 ```
 
 ## License

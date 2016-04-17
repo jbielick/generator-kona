@@ -37,28 +37,24 @@ var KonaScaffoldGenerator = yeoman.generators.NamedBase.extend({
     },
     routes: function() {
 
-      var root = this.destinationRoot();
-      var routesFilePath = path.join('config', 'routes.js');
-      var route = "  router.resource('" + this.slugged + "');";
-      var routeRegex;
-      var contents;
-      var parts;
+      // var root = this.destinationRoot();
+      // var routesFilePath = path.join('app', 'routes.js');
+      // var route = [];
+      // var routeRegex;
+      // var contents;
+      // var parts;
 
-      routeRegex = new RegExp('router\\.resource\\(\(\'|"\)' + this.slugged, 'g');
+      // contents = this.readFileAsString(routesFilePath);
+      // parts = contents.split(/^\}\s*$/gm);
 
-      contents = this.readFileAsString(routesFilePath);
-      parts = contents.split(/^\}\s*$/gm);
-
-      if (!parts.length) {
-        throw new Error('unable to parse routes.js! Check the syntax?');
-        return;
-      } else if (routeRegex.test(contents)) {
-        return;
-      } else {
-        parts[parts.length - 2] += route;
-        contents = parts.join("\n}");
-        this.write(routesFilePath, contents);
-      }
+      // if (!parts.length) {
+      //   throw new Error('unable to parse routes.js! Check the syntax?');
+      //   return;
+      // } else {
+      //   parts[parts.length - 2] += routes.join("\n\t");
+      //   contents = parts.join("\n}");
+      //   this.write(routesFilePath, contents);
+      // }
     }
   },
 
